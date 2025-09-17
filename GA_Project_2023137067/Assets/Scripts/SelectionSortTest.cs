@@ -3,38 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
 public class SelectionSortTest : MonoBehaviour
 {
 
-    long selectionTime;
+   
+
 
 
     // Start is called before the first frame update
     public void Start()
     {
 
+        
 
         int[] data = GenerateRandomArray(100);
 
-        Stopwatch sw = new Stopwatch();
-        sw.Reset();
-        sw.Start();
+        
         StartSelectionSort(data);
+
+        //
         UnityEngine.Debug.Log("정렬중임");
+        //
+
         foreach (var item in data)
         {
             UnityEngine.Debug.Log(item);
         }
-        sw.Stop();
+        
        
-        selectionTime = sw.ElapsedMilliseconds;
-
-        
-        
-
         
     }
 
@@ -45,7 +45,7 @@ public class SelectionSortTest : MonoBehaviour
     }
    
 
-    public void StartSelectionSort(int[] arr)
+    public static void StartSelectionSort(int[] arr)
     {
         int n = arr.Length;
         for (int i = 0; i < n - 1; i++)
@@ -62,12 +62,7 @@ public class SelectionSortTest : MonoBehaviour
             int temp = arr[minIndex];
             arr[minIndex] = arr[i];
             arr[i] = temp;
-
-            
-
-            
         }
-
     }
 
     public int[] GenerateRandomArray(int size)

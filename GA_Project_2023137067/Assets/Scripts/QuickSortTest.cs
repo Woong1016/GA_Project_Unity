@@ -9,22 +9,23 @@ using UnityEngine;
 public class QuickSortTest : MonoBehaviour
 {
 
-    Stopwatch sw = new Stopwatch();
+    
     // Start is called before the first frame update
     public void Start()
     {
         int[] data = GenerateRandomArray(100);
         StartQuickSort(data, 0 , data.Length -1);
         UnityEngine.Debug.Log("정렬중임 퀵정렬");
-        sw.Reset();
-        sw.Start();
-        QuickSortTest.StartQuickSort(data , 0 , data.Length-1);
+       
+        
         foreach (var item in data)
         {
             UnityEngine. Debug.Log(item);
         }
-        sw.Stop();
-        long QuickTime = sw.ElapsedMilliseconds;
+        
+        
+
+       
     }
 
     // Update is called once per frame
@@ -52,6 +53,9 @@ public class QuickSortTest : MonoBehaviour
         if(low < high)
         {
             int pivotIndex = Partition(arr, low, high);
+
+            StartQuickSort(arr, low, pivotIndex - 1);
+            StartQuickSort(arr, pivotIndex + 1, high);
         }
     }
 
@@ -72,6 +76,10 @@ public class QuickSortTest : MonoBehaviour
                 arr[j] = temp;
             }
         }
+
+        int temp2 = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = temp2;
         return i + 1; 
     }    
 
