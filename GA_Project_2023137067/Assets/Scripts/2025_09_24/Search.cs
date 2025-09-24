@@ -42,7 +42,7 @@ public class Search : MonoBehaviour
         linearySteps = 0;
         foreach (var t in targets)
         {
-            // linearySteps += Find
+            linearySteps += FindItemLinearSteps(t);
         }
 
         sortSteps = 0;
@@ -62,40 +62,7 @@ public class Search : MonoBehaviour
             $"Total (Sort + Binary) : {sortSteps + binarySteps}";
     }
 
-    private void Quicksort(List<Item> list , int left , int right)
-    {
-        if (left >= right) return;
-        int pivotIndex = Partition(list , left , right);
-        Quicksort(list , left , pivotIndex - 1);
-        Quicksort(list , pivotIndex +1 , right);
-
-    }
-
-    private int Partition(List<Item> list, int left, int right)
-    {
-        Item pivot = list[right];
-        int i = left - 1;
-        for(int j = left; j < right; j ++)
-        {
-            sortSteps++;
-            if (list[j].itemName.CompareTo(pivot .itemName) <=0)
-            {
-                i++;
-                Swap(list, i, j);
-                
-            }
-        }
-        Swap(list, i + 1, right);
-        return i + 1;
-    }
-
-    private void Swap(List<Item> list , int a , int b)
-    {
-        Item temp = list[a];
-        list[a] = list[b];
-        list[b] = temp;
-    }
-
+   
     private int FindItemLinearSteps(string target)
 
     {
@@ -130,6 +97,44 @@ public class Search : MonoBehaviour
         }
         return steps;
     }
+
+
+
+
+    private void Quicksort(List<Item> list, int left, int right)
+    {
+        if (left >= right) return;
+        int pivotIndex = Partition(list, left, right);
+        Quicksort(list, left, pivotIndex - 1);
+        Quicksort(list, pivotIndex + 1, right);
+
+    }
+
+    private int Partition(List<Item> list, int left, int right)
+    {
+        Item pivot = list[right];
+        int i = left - 1;
+        for (int j = left; j < right; j++)
+        {
+            sortSteps++;
+            if (list[j].itemName.CompareTo(pivot.itemName) <= 0)
+            {
+                i++;
+                Swap(list, i, j);
+
+            }
+        }
+        Swap(list, i + 1, right);
+        return i + 1;
+    }
+
+    private void Swap(List<Item> list, int a, int b)
+    {
+        Item temp = list[a];
+        list[a] = list[b];
+        list[b] = temp;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
