@@ -6,9 +6,8 @@ using UnityEngine;
 
 public class InventotyBigTest : MonoBehaviour
 {
-    public TextMeshPro tmp1;
-    public TextMeshPro tmp2;
-    public 
+    public TextMeshProUGUI tmpLinearResult;  
+    public TextMeshProUGUI tmpBinaryResult;
 
     List<Item> items = new List<Item>();
 
@@ -24,10 +23,11 @@ public class InventotyBigTest : MonoBehaviour
         }
         string target = "Item_45672";
         Stopwatch sw = Stopwatch.StartNew();
+        sw.Start();
         Item foundLinear = FindItemLinear(target);
         sw.Stop();
-        UnityEngine.Debug.Log($"[선형 탐색]{target} 개수 : {foundLinear?.quantity}, 시간 :{sw.ElapsedMilliseconds}ms");
-
+        //UnityEngine.Debug.Log($"[선형 탐색]{target} 개수 : {foundLinear?.quantity}, 시간 :{sw.ElapsedMilliseconds}ms");
+        string LResult = ($"[선형 탐색]{target} 개수 : {foundLinear?.quantity}, 시간 :{sw.ElapsedMilliseconds}ms");
         items.Sort((a, b) => a.itemName.CompareTo(b.itemName));
 
         sw.Restart();
@@ -36,28 +36,7 @@ public class InventotyBigTest : MonoBehaviour
         UnityEngine.Debug.Log($"[이진 탐색] {target} 개수 : {foundBInary?.quantity}, 시간 : {sw.ElapsedMilliseconds}ms");
 
     }
-    public void Test1(string Q1 , Item item)
-    {
-        for (int i = 0; i < 100000; i++)
-        {
-            string name = $"Item_{i:D5}";
-            int qty = rand.Next(1, 100);
-            items.Add(new Item(name, qty));
-        }
-        string target = "Item_45672";
-        Stopwatch sw = Stopwatch.StartNew();
-        Item foundLinear = FindItemLinear(target);
-        sw.Stop();
-        UnityEngine.Debug.Log($"[선형 탐색]{target} 개수 : {foundLinear?.quantity}, 시간 :{sw.ElapsedMilliseconds}ms");
-
-        items.Sort((a, b) => a.itemName.CompareTo(b.itemName));
-
-        sw.Restart();
-        Item foundBInary = FindItemBinary(target);
-        sw.Stop();
-        UnityEngine.Debug.Log($"[이진 탐색] {target} 개수 : {foundBInary?.quantity}, 시간 : {sw.ElapsedMilliseconds}ms");
-
-    }
+   
     public Item FindItemLinear(string targetName)
     {
         foreach (Item item in items)
