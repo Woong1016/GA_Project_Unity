@@ -37,12 +37,20 @@ public class BFSTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GenerateAndDisplayMaze();
+            ShowPath();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            ShowPath();
+            List<Vector2Int> path = FindPathBFS();
+            if (path != null)
+            {
+                StartCoroutine(Charactermove(path));
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            GenerateAndDisplayMaze();
         }
     }
 
@@ -114,8 +122,8 @@ public class BFSTest : MonoBehaviour
         pathHolder = new GameObject("PathHolder").transform;
         pathHolder.SetParent(mazeHolder);
 
-        List < Vector2Int > pathList= new List<Vector2Int>();
-
+        //List < Vector2Int > pathList= new List<Vector2Int>();
+        List<Vector2Int> pathList = FindPathBFS();
         if(pathList == null)
         {
             return;
@@ -140,8 +148,24 @@ public class BFSTest : MonoBehaviour
 
         Vector2Int StartPos = pathList[0];
         //GameObject 여기까지 만듬 2025. 11.19 이어서 만들자 
+        GameObject unit = Instantiate(CharacterPrefab, new Vector3(StartPos.x, 0.5f, StartPos.y), Quaternion.identity);
 
+        foreach(Vector2Int target in pathList)
+        {
+            Vector3 Startpos = unit.transform.position;
+            Vector3 EndPos = new Vector3(target.x, 0.5f, target.y);
+            float time = 0f;
+            float duration = 0.2f;
 
+            while (time < duration)
+            {
+                unit.transform.position = Vector3.Lerp(Startpos, EndPos, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+
+            }
+            unit.transform.position = EndPos;
+        }
     }
 
     void CarvePath(int x, int y)
