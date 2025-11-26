@@ -168,9 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 21
   height: 21
-  wall: {fileID: 0}
-  floor: {fileID: 0}
-  path: {fileID: 0}
+  wall: {fileID: 7010194882556411484, guid: fb78279b91bc835408e182fc179ed100, type: 3}
+  floor: {fileID: 2398453864471126314, guid: d4ce59efb9ce90d4f955e7a77ee5c1f4, type: 3}
+  path: {fileID: 7003693068793297213, guid: 93e78e146c021c3449bf14fdd0eea891, type: 3}
 --- !u!1 &1116759038
 GameObject:
   m_ObjectHideFlags: 0
