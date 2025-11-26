@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class DijkstraSample : MonoBehaviour
+public class DijkstraTest : MonoBehaviour
 {
     // 0=∫Æ, 1=∆Ú¡ˆ, 2=Ω£, 3=¡¯»Î
 
+    int size = 11;
+    int[,] mapsize;
+
+     
+
+     
     public GameObject wall;
     public GameObject floor;
     public GameObject path;
@@ -13,15 +20,8 @@ public class DijkstraSample : MonoBehaviour
     public GameObject tree;
 
 
-    int[,] map =
-    {
-        {0,0,0,0,0,0,0},
-        {0,1,1,1,1,1,0},
-        {0,1,2,2,1,1,0},
-        {0,1,3,1,1,1,0},
-        {0,1,1,1,2,1,0},
-        {0,0,0,0,0,0,0},
-    };
+    
+    
 
     void Start()
     {
@@ -44,11 +44,11 @@ public class DijkstraSample : MonoBehaviour
         int w = map.GetLength(0);
         int h = map.GetLength(1);
 
-        int[,] dist = new int[w, h];            
-        bool[,] visited = new bool[w, h];       
-        Vector2Int?[,] parent = new Vector2Int?[w, h];  
+        int[,] dist = new int[w, h];
+        bool[,] visited = new bool[w, h];
+        Vector2Int?[,] parent = new Vector2Int?[w, h];
 
-        
+
         for (int x = 0; x < w; x++)
             for (int y = 0; y < h; y++)
                 dist[x, y] = int.MaxValue;
@@ -91,27 +91,27 @@ public class DijkstraSample : MonoBehaviour
             if (cur == goal)
                 return ReconstructPath(parent, start, goal);
 
-            
+
             foreach (var d in dirs)
             {
                 int nx = cur.x + d.x;
                 int ny = cur.y + d.y;
 
                 if (!InBounds(map, nx, ny)) continue;
-                if (map[nx, ny] == 0) continue; 
+                if (map[nx, ny] == 0) continue;
 
-                int moveCost = TileCost(map[nx, ny]);  
+                int moveCost = TileCost(map[nx, ny]);
                 if (moveCost == int.MaxValue) continue;
 
                 int newDist = dist[cur.x, cur.y] + moveCost;
 
-                 
+
                 if (newDist < dist[nx, ny])
                 {
                     dist[nx, ny] = newDist;
                     parent[nx, ny] = cur;
 
-                   
+
                     if (!visited[nx, ny] && !open.Contains(new Vector2Int(nx, ny)))
                         open.Add(new Vector2Int(nx, ny));
                 }
