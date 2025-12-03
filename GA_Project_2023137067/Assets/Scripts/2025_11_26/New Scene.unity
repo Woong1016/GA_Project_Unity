@@ -122,6 +122,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &32896694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32896696}
+  - component: {fileID: 32896695}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &32896695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32896694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d150d11b56d2bd54587e2c8ffe0366db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  w: 21
+  h: 21
+  wallObj: {fileID: 7010194882556411484, guid: fb78279b91bc835408e182fc179ed100, type: 3}
+  floorObj: {fileID: 2398453864471126314, guid: d4ce59efb9ce90d4f955e7a77ee5c1f4, type: 3}
+  treeObj: {fileID: 6538062686647471412, guid: bee5e39d49ab26c4da0b635e6f1d5468, type: 3}
+  mudObj: {fileID: 6670398958974534312, guid: ec05b2cff8cfec7418c1a1ebc34b4c35, type: 3}
+  pathObj: {fileID: 7003693068793297213, guid: 93e78e146c021c3449bf14fdd0eea891, type: 3}
+--- !u!4 &32896696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32896694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.982167, y: 10.565484, z: -15.950313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085285314
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,3 +365,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1594375418}
   - {fileID: 1085285316}
+  - {fileID: 32896696}

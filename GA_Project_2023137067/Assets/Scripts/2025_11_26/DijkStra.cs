@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class MapManager : MonoBehaviour
+public class DijkStra : MonoBehaviour
 {
     public int w = 21;
     public int h = 21;
@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     public GameObject pathObj;
 
     int[,] map;
-    
+
     List<GameObject> currentMapObjs = new List<GameObject>();
     List<GameObject> pathObjs = new List<GameObject>();
 
@@ -68,7 +68,15 @@ public class MapManager : MonoBehaviour
         CreateValidMap();
     }
 
-    public void FindPathBtn()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            FindPath();
+        }
+    }
+
+    void FindPath()
     {
         for (int i = 0; i < pathObjs.Count; i++)
         {
@@ -76,7 +84,7 @@ public class MapManager : MonoBehaviour
         }
         pathObjs.Clear();
 
-        List<Vector2Int> path = Dijkstra();
+        List<Vector2Int> path = RunDijkstra();
 
         if (path != null)
         {
@@ -122,11 +130,11 @@ public class MapManager : MonoBehaviour
         while (stack.Count > 0)
         {
             current = stack.Pop();
-            
-            List<int> dirList = new List<int>();
-            for(int k=0; k<4; k++) dirList.Add(k);
 
-            for(int k=0; k<dirList.Count; k++)
+            List<int> dirList = new List<int>();
+            for (int k = 0; k < 4; k++) dirList.Add(k);
+
+            for (int k = 0; k < dirList.Count; k++)
             {
                 int r = Random.Range(0, dirList.Count);
                 int temp = dirList[k];
@@ -144,10 +152,10 @@ public class MapManager : MonoBehaviour
                     if (map[nx, ny] == 0)
                     {
                         stack.Push(current);
-                        
+
                         map[current.x + dx[i] / 2, current.y + dy[i] / 2] = 1;
                         map[nx, ny] = 1;
-                        
+
                         stack.Push(new Vector2Int(nx, ny));
                         break;
                     }
@@ -176,7 +184,7 @@ public class MapManager : MonoBehaviour
     {
         bool[,] visited = new bool[w, h];
         Stack<Vector2Int> stack = new Stack<Vector2Int>();
-        
+
         stack.Push(startPoint);
         visited[startPoint.x, startPoint.y] = true;
 
@@ -207,17 +215,17 @@ public class MapManager : MonoBehaviour
         return false;
     }
 
-    List<Vector2Int> Dijkstra()
+    List<Vector2Int> RunDijkstra()
     {
         SimplePriorityQueue pq = new SimplePriorityQueue();
-        
+
         int[,] dist = new int[w, h];
         for (int x = 0; x < w; x++)
             for (int y = 0; y < h; y++)
                 dist[x, y] = 999999;
 
         dist[startPoint.x, startPoint.y] = 0;
-        
+
         pq.Push(new Node(startPoint.x, startPoint.y, 0, null));
 
         int[] dx = { 1, -1, 0, 0 };
