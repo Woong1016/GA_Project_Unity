@@ -8,7 +8,7 @@ public class DijkstraTest : MonoBehaviour
     // 0=º®, 1=ÆòÁö, 2=½£, 3=ÁøÈë
 
     int size = 11;
-    int[,] mapsize;
+    int[,] map;
 
      
 
